@@ -34,10 +34,10 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container" style="margin-top:10%;">
+  <div class="container" style="margin-top:35vh;">
     <div class="row" style="text-align:center;">
         <h4>Article Summarizer</h4>
-        <p>Enter a tech crunch url below:</p>
+        <p>Enter a <a href="http://techcrunch.com/">tech crunch</a> or <a href="http://venturebeat.com">venture beat </a> article url below:</p>
 
         <form method="post" action="/sumitup/home">
           <input type="text" name="url">

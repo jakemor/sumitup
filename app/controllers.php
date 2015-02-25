@@ -92,16 +92,29 @@ function home() {
 	// CODE HERE
 
 	if (isset($_POST["url"]) && $_POST["url"] != "") {
-		$link = $_POST["url"]; 
+		$link = $_POST["url"];
+
+		$domain = parse_url($link)['host']; 
+
+		$class_names = []; 
+
+		$class_names["techcrunch.com"] = []; 
+		$class_names["techcrunch.com"]["title"] = 'h1[class=alpha tweet-title]'; 
+		$class_names["techcrunch.com"]["text"] = 'div[class=article-entry text]'; 
+
+		$class_names["venturebeat.com"] = []; 
+		$class_names["venturebeat.com"]["title"] = 'h1[class=entry-title]'; 
+		$class_names["venturebeat.com"]["text"] = 'div[class=post-content]'; 
+
 		$html = file_get_html($link);
 
 		$title = ""; 
-		$text = ""; 
+		$text = "";
 
-		foreach($html->find('h1[class=alpha tweet-title]') as $element) 
+		foreach($html->find($class_names[$domain]["title"]) as $element) 
 		       $title = $element->plaintext;
 
-		foreach($html->find('div[class=article-entry text]') as $div) {
+		foreach($html->find($class_names[$domain]["text"]) as $div) {
 	       foreach($div->find('p') as $p) {
 	             $text .= $p->plaintext . " "; 
 	       }
@@ -115,12 +128,33 @@ function home() {
 
 		$text_tokens = explode(" ", $text);
 		$summary_tokens = explode(" ", $summary);
+		$title_tokens = explode(" ", $title);
+
+		$topics = array_keys($hash_map);
+
+		for ($i=0; $i < sizeof($summary_tokens); $i++) { 
+			foreach ($topics as $topic) {
+				if (strtolower($summary_tokens[$i]) == $topic) {
+					$summary_tokens[$i] = "<a>" . $summary_tokens[$i] . "</a>"; 
+					break; 
+				}
+			}
+		}
+
+		for ($i=0; $i < sizeof($title_tokens); $i++) { 
+			foreach ($topics as $topic) {
+				if (strtolower($title_tokens[$i]) == $topic) {
+					$title_tokens[$i] = "<a>" . $title_tokens[$i] . "</a>"; 
+					break; 
+				}
+			}
+		}
 
 		$data = []; 
 
-		$data["summary"] = $summary;
+		$data["summary"] = implode(" ", $summary_tokens);
 		$data["topics"] = array_keys($hash_map); 
-		$data["title"] = $title;
+		$data["title"] = implode(" ", $title_tokens);
 		$data["old_count"] = sizeof($text_tokens); 
 		$data["new_count"] = sizeof($summary_tokens); 
 

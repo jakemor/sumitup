@@ -34,14 +34,23 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container" style="margin-top:10%;">
+  <div class="container" style="margin-top:10vh;">
     <div class="row" style="text-align:center;">
         <?php echo "<h4 style='text-align:center;'>" . $data["title"] . "</h4>"; ?>
-        <?php echo "<p style='text-align:center;'> From {$data["old_count"]} words to {$data["new_count"]}<p>"; ?>
+        <?php echo "<p style='text-align:center;'> <em> from {$data["old_count"]} words to {$data["new_count"]} </em></p>"; ?>
+        <?php 
+          // echo "<p style='text-align:center;'>"; 
+
+          // foreach ($data["topics"] as $topic) {
+          //   echo "<a>#" . $topic . "</a>, ";
+          // }
+
+          // echo "</p>"; 
+        ?>
         <?php echo "<p style='text-align:left;'>" . $data["summary"] . "</p>"; ?>
 
     </div>
-    <div class="row" style="text-align:center;">
+    <div class="row" style="text-align:center; margin-bottom:10vh;">
       <hr>
       <p>Built with ❤️ by <a href="https://jakemor.com">Jake Mor</a></p>
     </div>
