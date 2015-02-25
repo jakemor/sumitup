@@ -21,8 +21,8 @@
 
   <!-- CSS ( jakephp only supports direct paths to static files at the moment :p )
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="/jakephp/app/views/static/normalize.css">
-  <link rel="stylesheet" href="/jakephp/app/views/static/skeleton.css">
+  <link rel="stylesheet" href="/sumitup/app/views/static/normalize.css">
+  <link rel="stylesheet" href="/sumitup/app/views/static/skeleton.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
